@@ -9,6 +9,7 @@ type GoogleMapState = {
   map: google.maps.Map | null;
 }
 
+
 class GoogleMap extends React.PureComponent<{}, GoogleMapState> {
   private splytOffice = { lat: 51.5049375, lng: -0.0964509 }
   private mapRef: HTMLDivElement | null = null
@@ -24,8 +25,13 @@ class GoogleMap extends React.PureComponent<{}, GoogleMapState> {
   initMap = () => {
     GoogleMapsLoader.KEY = 'AIzaSyAyTznkR5T3FOYaUMFViDCWNQeYVlhX0SA'
     GoogleMapsLoader.REGION = 'GB'
+    
 
     GoogleMapsLoader.load(google => {
+      const markerIcon: google.maps.ReadonlyIcon = {
+        url: 'http://maps.google.com/mapfiles/kml/pal4/icon62.png',
+        size: new google.maps.Size(80, 80)
+      }
       this.setState(
         state => ({
           ...state,
@@ -39,7 +45,9 @@ class GoogleMap extends React.PureComponent<{}, GoogleMapState> {
             new google.maps.Marker({
               map: this.state.map,
               position: this.splytOffice,
-              title: 'Hello World'
+              // title: 'Foo',
+              // label: 'Babyboy',
+              icon: markerIcon
             })
           }
         }
