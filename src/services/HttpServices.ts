@@ -1,4 +1,4 @@
-import { driversCount } from './constants'
+import { driversCount } from '../constants'
 
 // Parses the JSON returned by a network request
 const parseJSON = (response: Response) => {
@@ -13,7 +13,10 @@ const checkStatus = (response: Response) => {
   if (response.status >= 200 && response.status < 300) {
     return response
   }
-  throw new Error(JSON.stringify(response))
+
+  const error = new Error(`${response.status} ${response.statusText}`)
+  error.stack = JSON.stringify(response)
+  throw error
 }
 
 // Fetch available drivers

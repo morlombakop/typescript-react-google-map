@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RangeSlider component tests RangeSlider component renders properly 1`] = `
+.c0 {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: calc(100% - 30px);
+  padding: 0 15px;
+}
+
+<div
+  class="c0"
+  data-testid="range-slider-container"
+>
+  <div
+    class="rc-slider"
+  >
+    <div
+      class="rc-slider-rail"
+      style="background-color: rgb(211, 211, 211); height: 7px;"
+    />
+    <div
+      class="rc-slider-track"
+      style="background-color: rgb(76, 175, 80); height: 7px; left: 0%; width: 18.367346938775512%;"
+    />
+    <div
+      class="rc-slider-step"
+    />
+    <div
+      aria-disabled="false"
+      aria-valuemax="50"
+      aria-valuemin="1"
+      aria-valuenow="10"
+      class="rc-slider-handle"
+      role="slider"
+      style="border-color: #4caf50; height: 28px; width: 28px; margin-left: -14px; margin-top: -9px; background-color: rgb(76, 175, 80); left: 18.367346938775512%;"
+      tabindex="0"
+    />
+    <div
+      class="rc-slider-mark"
+    />
+  </div>
+</div>
+`;

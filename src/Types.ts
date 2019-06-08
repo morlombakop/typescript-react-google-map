@@ -23,7 +23,7 @@ export interface IGoogleMapProps {
   drivers: IDriver[]
 }
 
-export interface ISliderProps {
+export interface IRangeSliderProps {
   sliderValue: number;
-  onChange: (sliderValue: number) => void
+  onSlideComplete: (sliderValue: number) => void
 }

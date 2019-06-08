@@ -1,113 +1,64 @@
 import * as React from 'react'
 import GoogleMapsLoader from 'google-maps'
 import styled from 'styled-components'
-import { isEqual } from 'lodash'
-import { IGoogleMapProps, IDriver } from '../Types';
+import { IGoogleMapProps } from '../Types';
 
 const Container = styled.div`
   height: 100vh;
 `
-type GoogleMapState = {
-  map: google.maps.Map | null
-  google: GoogleMapsLoader.google | null
-  markers: google.maps.Marker[] | null[]
-}
-
-class GoogleMap extends React.PureComponent<IGoogleMapProps, GoogleMapState> {
+class GoogleMap extends React.PureComponent<IGoogleMapProps> {
   private splytOffice = { lat: 51.5049375, lng: -0.0964509 }
   private mapRef: HTMLDivElement | null = null
 
-  readonly state: GoogleMapState = {
-    map: null,
-    google: null,
-    markers: []
-  }
-
-  componentDidUpdate(prevProps: IGoogleMapProps){
-    if(!isEqual(prevProps.drivers, this.props.drivers)){
-      console.log('component did update ......', this.props)
-      // this.removeMarkers().then(() => this.setMarkers())
-    }
-  }
-
-  componentWillUnmount(){
-    this.setState(state => ({
-      ...state,
-      google: null,
-      markers: [],
-      map: null
-    }))
+  componentDidMount(){
+    this.loadMap();
   }
 
   getMapRef = (ref: HTMLDivElement | null): void => {
     this.mapRef = ref
   }
 
-  initMap = () => {
+  loadMap = () => {
     GoogleMapsLoader.KEY = 'AIzaSyAyTznkR5T3FOYaUMFViDCWNQeYVlhX0SA'
     GoogleMapsLoader.REGION = 'GB'
     
     GoogleMapsLoader.load(google => {
-      this.setState(
-        state => ({
-          ...state,
-          google,
-          map: new google.maps.Map(this.mapRef, {
-            zoom: 15,
-            center: this.splytOffice,
-          }),
-        }),
-        () => {
-          if (this.state.map) {
-            new google.maps.Marker({
-              map: this.state.map,
-              position: this.splytOffice,
-            })
-          }
-          this.setMarkers()
-        }
-      )
+      const map = new google.maps.Map(this.mapRef, {
+        zoom: 13,
+        center: this.splytOffice,
+      })
+
+      this.buildMarkers(map, google);
     })
   }
 
-  setMarkers = async () => {
-    if (this.state.map && this.state.google) {
-      const markerIcon: google.maps.ReadonlyIcon = {
-        url: 'http://maps.google.com/mapfiles/kml/pal4/icon62.png',
-        size: new this.state.google.maps.Size(80, 80)
-      }
-      this.setState(state => ({
-        ...state,
-        markers: this.props.drivers.map<google.maps.Marker>(driver =>
-          new google.maps.Marker({
-            map: this.state.map!,
-            position: {
-              lat: driver.location.latitude,
-              lng: driver.location.longitude,
-            },
-            icon: markerIcon
-          })
-        )
-      }))
+  buildMarkers = (map: google.maps.Map, google: GoogleMapsLoader.google) => {
+    const markerIcon: google.maps.ReadonlyIcon = {
+      url: 'http://maps.google.com/mapfiles/kml/pal4/icon62.png',
+      size: new google.maps.Size(80, 80),
     }
-  }
-
-  removeMarkers = async () => {
-    this.state.markers.forEach((marker: google.maps.Marker | null) => {
-      if(marker){
-        marker.setMap(null)
-        // tslint:disable-next-line:no-parameter-reassignment
-        marker = null
-      }
+    
+    // User location marker
+    new google.maps.Marker({
+      map,
+      position: this.splytOffice,
     })
+
+    return this.props.drivers.map<google.maps.Marker>(
+      driver =>
+        new google.maps.Marker({
+          map,
+          position: {
+            lat: driver.location.latitude,
+            lng: driver.location.longitude,
+          },
+          icon: markerIcon,
+        })
+    )
   }
 
   render() {
-    if(!this.state.map){
-      this.initMap()
-    }
-    
-    return <Container data-testid="map-container" ref={this.getMapRef} />
+    return <Container ref={this.getMapRef} data-testid="map-container"/>
   }
 }
 

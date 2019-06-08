@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error component tests Error component renders properly 1`] = `
+.c0 {
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.c0 h1 {
+  color: red;
+  text-align: center;
+}
+
+.c0 h5 {
+  text-align: center;
+  font-weight: normal;
+}
+
+<div
+  class="c0"
+  data-testid="error-container"
+>
+  <h1>
+    Error
+  </h1>
+  <h5>
+    Please ensure you have an internet connection and reload the page.
+  </h5>
+</div>
+`;
