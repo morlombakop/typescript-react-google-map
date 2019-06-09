@@ -3,21 +3,25 @@
   "version": "1.0.0",
   "description": "react google map with multiples pin and a slider",
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "https://github.com/morlombakop/typescript-react-google-map.git"
   },
   "author": "Morlo Mbakop",
   "license": "UNLICENSED",
   "main": "src/index.tsx",
   "scripts": {
+    "develop": "concurrently -r \"npm:type-check:watch\" \"npm:start\"",
     "start:server": "node server",
     "start:fe": "parcel ./src/index.html",
-    "start": "npm run start:server & npm run start:fe",
+    "start": "concurrently -k \"npm:start:server\" \"npm:start:fe\"",
     "test": "jest",
+    "test:e2e": "start-server-and-test start http://localhost:1234 cy:run",
     "test:no-cache": "jest --no-cache",
     "test:coverage": "jest --coverage --no-cache",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "foo": "node server parcel ./src/index.html"
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "tsc --noEmit --watch"
   },
   "engines": {
     "node": ">= 8.11.0",
@@ -64,6 +68,7 @@
     "jest-styled-components": "^6.3.1",
     "parcel": "^1.12.3",
     "prettier": "^1.16.4",
+    "start-server-and-test": "^1.9.1",
     "ts-jest": "^24.0.2",
     "tslint": "^5.13.1",
     "tslint-config-airbnb": "^5.11.1",

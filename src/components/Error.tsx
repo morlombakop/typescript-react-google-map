@@ -21,6 +21,7 @@ const Error: React.FC = () => {
 
   return(
     <Container  data-testid="error-container">
+      {/* In a normal project these texts will be saved in a separate json file for internationalization */}
       <h1>Error</h1>
       <h5>Please ensure you have an internet connection and reload the page.</h5>
     </Container>
