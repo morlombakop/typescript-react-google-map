@@ -20,10 +20,10 @@ describe('GoogleMap component tests', () => {
   ]
 
   test('GoogleMap component renders properly', async () => {
-    const componentDidMount = jest.spyOn(GoogleMap.prototype, 'componentDidMount');
+    const componentDidMount = jest.spyOn(GoogleMap.prototype, 'componentDidMount')
     const { getByTestId } = render(<GoogleMap drivers={drivers} />)
     const mapContainer = await waitForElement(() => getByTestId('map-container'))
-    
+
     expect(mapContainer).toBeInstanceOf(HTMLDivElement)
     expect(mapContainer.childElementCount).toBe(0)
     expect(mapContainer).toHaveStyleRule('height', '100vh')

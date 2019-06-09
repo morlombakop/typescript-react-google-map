@@ -1,10 +1,10 @@
 import * as React from 'react'
 import Slider, { createSliderWithTooltip } from 'rc-slider'
 import styled from 'styled-components'
-import { IRangeSliderProps } from '../Types';
+import { IRangeSliderProps } from '../Types'
 
-const RangeSlider: React.FC<IRangeSliderProps> = ({ onSlideComplete, sliderValue })  => {
-  const SliderWithTooltip = createSliderWithTooltip(Slider);
+const RangeSlider: React.FC<IRangeSliderProps> = ({ onSlideComplete, sliderValue }) => {
+  const SliderWithTooltip = createSliderWithTooltip(Slider)
   const Container = styled.div`
     position: absolute;
     bottom: 20px;

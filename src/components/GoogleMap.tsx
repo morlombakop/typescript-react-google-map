@@ -11,7 +11,7 @@ class GoogleMap extends React.PureComponent<IGoogleMapProps> {
   private mapRef: HTMLDivElement | null = null
 
   componentDidMount(){
-    this.loadMap();
+    this.loadMap()
   }
 
   getMapRef = (ref: HTMLDivElement | null): void => {
