@@ -12,11 +12,12 @@ describe('App UI test', () => {
 
   it('Should dismiss Google Map alert modal if exist', () => {
     const googleAlertText = `This page can't load Google Maps correctly.`
-    if(cy.contains(googleAlertText)){
-      cy.get('.dismissButton').click()
-    }
-
-    cy.get('.dismissButton').should('not.exist')
+    cy.contains(googleAlertText).then(element => {
+      if (element) {
+        cy.get('.dismissButton').click()
+      }
+      cy.get('.dismissButton').should('not.exist')
+    })
   })
 
   it('Should render maps, slider and default markers', () => {
@@ -31,8 +32,8 @@ describe('App UI test', () => {
       .its('length')
       .should('be.gte', 1)
 
-      // Ensure the map has at least 25 taxi marker
-      cy.get('[data-testid="map-container"]')
+    // Ensure the map has at least 25 taxi marker
+    cy.get('[data-testid="map-container"]')
       .find('img')
       .filter(`[src="${taxiMarkerUrl}"]`)
       .its('length')
