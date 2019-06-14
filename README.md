@@ -2,11 +2,11 @@
 
 This app is build:
 
-- React + ReactDOM (16.8.4)
+- React + ReactDOM
 - Typescript (with TSLint setting)
 - Prettier + tslint-config-prettier
 - Test configuration using Jest and [react-testing-library](https://github.com/kentcdodds/react-testing-library)
-- Parcel bundler (1.12.0~)
+- Parcel bundler
 - End to End Automation test with [Cypress](https://github.com/cypress-io/cypress)
 
 ## Quick start
@@ -18,4 +18,3 @@ This app is build:
 5. run `npm run start` to transpile typescript and start the app. View the app on `localhost:1234`
 6. run `npm run test` to execute the unit tests.
 7. run `npm run test:e2e` to execute the automated UI text or e2e tests. Please ensure the no other process related to this repository is running. This commend will start the App and kick start automated tests.
-8. run `npm run build` to build the app for production. The production files will be available in the `dist directory`
